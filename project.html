@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="jpg" href="img/wew.jpg">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="profile-container">
+            <img src="img/we (2).jpg" alt="Your Photo" class="profile-pic">
+            <h2>Khennet Jay Ceño</h2>
+            <p class="designer-title">Photographer/Web Developer.</p>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/khennethjay.ceno"><img src="img/fblogo.jpg" alt="Facebook"></a>
+                <a href="https://www.instagram.com/cenokhennethjay/"><img src="img/iglogo.jpg" alt="Instagram"></a>
+                <a href="https://www.linkedin.com/in/khennet-jay-ceño-670a81415/"><img src="img/inlogo.jpg" alt="LinkedIn"></a>
+            </div>
+        </div>
+
+        <a href="https://docs.google.com/document/d/1PUmH8Qv5qoqhzOy81ZrzovvSl2RIhFOp/edit?usp=sharing&ouid=112312947945963151123&rtpof=true&sd=true" download class="btn">Download CV</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <h1 class="section-title">Projects</h1> 
+        <div class="project-grid">
+            <!-- Project Cards -->
+            <div class="project-card" data-project="1">
+                <img src="img/PROJ/regs/regs1.png" alt="Project 1 Cover" class="project-cover">
+                <h3>REGISTRAR DOCUMENT REQUEST SYSTEM</h3>
+            </div>
+            <div class="project-card" data-project="2">
+                <img src="img/PROJ/heyfr/hf.jpg" alt="Project 2 Cover" class="project-cover">
+                <h3>FRIEND FORM</h3>
+            </div>
+             <div class="project-card" data-project="3">
+                <img src="img/PROJ/SUMO/sumo.jpg" alt="Project 3 Cover" class="project-cover">
+                <h3>SUMOBOT</h3>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Taskbar -->
+    <div class="taskbar">
+        <div class="taskbar-background">
+            <ul>
+                <li><a href="index.html"><img src="img/about.png" alt="About Icon"> About</a></li>
+                <li><a href="project.html"><img src="img/work.png" alt="Project Icon"> Project</a></li>
+                <li><a href="blog.html"><img src="img/blog.png" alt="Blogs Icon"> Services</a></li>
+                <li><a href="certificate.html"><img src="img/ct.png" alt="Certificate Icon"> Certification</a></li>
+                <li><a href="contact.html"><img src="img/contact.png" alt="Contact Icon"> Contact</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Modal Structure -->
+    <div id="project-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 id="modal-title"></h2>
+            <img id="modal-img" src="" alt="Project Image">
+            <p id="modal-description"></p>
+            <a id="modal-download" href="#" download class="btn">Download Project</a>
+        </div>
+    </div>
+
+    <script>
+document.addEventListener("DOMContentLoaded", () => {
+    const projects = [
+        { 
+            id: 1, 
+            title: "Registrar Document Request System", 
+            description: "A web-based Registrar Document Request System designed to simplify the process of requesting academic documents such as transcripts, certifications, and records. The system enables students to submit requests online, track request status, and receive updates, improving efficiency and reducing processing time.",
+            images: ["img/PROJ/regs/regs1.png", "img/PROJ/regs/regs2.png", "img/PROJ/regs/regs3.png", "img/PROJ/regs/regs4.png", "img/PROJ/regs/regs5.png", "img/PROJ/regs/regs6.png", "img/PROJ/regs/regs7.png", "img/PROJ/regs/regs8.png"], 
+            downloadLink: "https://drive.google.com/drive/folders/1IDPVJcKZtiXBZZCcgnyo4In-7inTrmRF?usp=sharing" 
+        },
+        { 
+            id: 2, 
+            title: "FRIEND FORM", 
+            description: "Capsphere is a dedicated platform designed to bridge this gap, offering a seamless, user-friendly solution for artists to display their work and for clients to discover and hire creative professionals.", 
+            images: ["img/PROJ/heyfr/hf.jpg"], 
+            downloadLink: "https://drive.google.com/drive/folders/16s6-B5D2yogGKA-wzUrg-j3RRdgsM9DM?usp=sharing"
+        },
+        { 
+            id: 3, 
+            title: "SUMOBOT", 
+            description: "A Sumobot is an autonomous or remote-controlled robot designed to compete in sumo-style battles, where the goal is to push the opponent's robot out of a circular ring called a dohyo. Built using microcontrollers, motor drivers, and sensors, the robot detects its opponent and the ring boundaries to strategically outmaneuver and eliminate the competition. This project demonstrates core concepts in robotics, programming, electronics, and mechanical design.",
+            images: ["img/PROJ/SUMO/sumo.jpg", "img/PROJ/SUMO/sumo2.jpg", "img/PROJ/SUMO/sumo7.jpg"], 
+            downloadLink: "files/project3.zip" 
+        },
+    ];
+
+    const modal = document.getElementById("project-modal");
+    const modalTitle = document.getElementById("modal-title");
+    const modalImg = document.getElementById("modal-img");
+    const modalDescription = document.getElementById("modal-description");
+    const modalDownload = document.getElementById("modal-download");
+    const closeModal = document.querySelector(".close-modal");
+
+    let currentProjectImages = [];
+    let currentImageIndex = 0;
+    let slideshowInterval;
+
+    const updateSlideshow = () => {
+        modalImg.src = currentProjectImages[currentImageIndex];
+    };
+
+    const startSlideshow = () => {
+        slideshowInterval = setInterval(() => {
+            currentImageIndex = (currentImageIndex + 1) % currentProjectImages.length; // Loop back to the first image
+            updateSlideshow();
+        }, 5000); // Change slides every 3 seconds
+    };
+
+    const stopSlideshow = () => {
+        clearInterval(slideshowInterval);
+    };
+
+    document.querySelectorAll(".project-card").forEach(card => {
+        card.addEventListener("click", () => {
+            const projectId = parseInt(card.getAttribute("data-project"));
+            const project = projects.find(p => p.id === projectId);
+
+            if (project) {
+                modalTitle.textContent = project.title;
+                modalDescription.innerHTML = project.description;
+                modalDownload.href = project.downloadLink;
+
+                currentProjectImages = project.images;
+                currentImageIndex = 0; // Start with the first image
+                updateSlideshow();
+
+                modal.style.display = "block";
+                startSlideshow(); // Start the automatic slideshow
+            }
+        });
+    });
+
+    closeModal.addEventListener("click", () => {
+        modal.style.display = "none";
+        stopSlideshow(); // Stop the slideshow when the modal is closed
+    });
+
+    window.addEventListener("click", (event) => {
+        if (event.target === modal) {
+            modal.style.display = "none";
+            stopSlideshow(); // Stop the slideshow when clicking outside the modal
+        }
+    });
+});
+    </script>
+</body>
+</html>

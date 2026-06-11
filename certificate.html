@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="jpg" href="img/wew.jpg">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="profile-container">
+            <img src="img/we (2).jpg" alt="Your Photo" class="profile-pic">
+            <h2>Khennet Jay Ceño</h2>
+            <p class="designer-title">Photographer/Web Developer.</p>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/khennethjay.ceno"><img src="img/fblogo.jpg" alt="Facebook"></a>
+                <a href="https://www.instagram.com/cenokhennethjay/"><img src="img/iglogo.jpg" alt="Instagram"></a>
+                <a href="https://www.linkedin.com/in/khennet-jay-ceño-670a81415/"><img src="img/inlogo.jpg" alt="LinkedIn"></a>
+            </div>
+        </div>
+
+        <a href="https://docs.google.com/document/d/1PUmH8Qv5qoqhzOy81ZrzovvSl2RIhFOp/edit?usp=sharing&ouid=112312947945963151123&rtpof=true&sd=true" download class="btn">Download CV</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <h1 class="section-title">Certificates</h1> 
+        <div class="certificate-grid">
+            <!-- Project Cards -->
+            <div class="certificate-card" data-project="1">
+                <img src="img/PROJ/certificate/cert.jpg" alt="Project 1 Cover" class="project-cover" loading="lazy">
+                <h3>PROGRAMMING ARDUINO USING ASSEMBLY LANGUAGE</h3>
+            </div>
+            <div class="certificate-card" data-project="2">
+                <img src="img/PROJ/certificate/cert2.jpg" alt="Project 2 Cover" class="project-cover" loading="lazy">
+                <h3>COMFEST 2026</h3>
+            </div>			
+        </div>
+    </div>
+
+    <!-- Certificate Modal Structure -->
+    <div id="cer-modal" class="cer-modal hidden">
+        <div class="cer-modal-content">
+            <span class="close-cer-modal">&times;</span>
+            <img id="cer-modal-img" src="" alt="Certificate Image">
+        </div>
+    </div>
+
+    <!-- Taskbar (15%) -->
+<div class="taskbar">
+    <div class="taskbar-background">
+        <ul>
+            <li><a href="index.html"><img src="img/about.png" alt="About Icon"> About</a></li>
+            <li><a href="project.html"><img src="img/work.png" alt="Project Icon"> Project</a></li>
+            <li><a href="blog.html"><img src="img/blog.png" alt="Blogs Icon"> Services</a></li>
+            <li><a href="certificate.html"><img src="img/ct.png" alt="Certificate Icon"> Certification</a></li>
+            <li><a href="contact.html"><img src="img/contact.png" alt="Contact Icon"> Contact</a></li>
+        </ul>
+    </div>
+</div>
+    <script>
+	document.addEventListener("DOMContentLoaded", () => {
+    const cerModal = document.getElementById("cer-modal");
+    const cerModalImg = document.getElementById("cer-modal-img");
+    const closeCerModal = document.querySelector(".close-cer-modal");
+
+    // Open modal on certificate click
+    document.querySelectorAll(".certificate-card").forEach(card => {
+        card.addEventListener("click", () => {
+            const imgSrc = card.querySelector("img").src;
+            cerModalImg.src = imgSrc;
+            cerModal.classList.add("visible");
+            cerModal.classList.remove("hidden");
+        });
+    });
+
+    // Close modal on click
+    closeCerModal.addEventListener("click", () => {
+        cerModal.classList.add("hidden");
+        cerModal.classList.remove("visible");
+    });
+
+    // Close modal on outside click
+    cerModal.addEventListener("click", (e) => {
+        if (e.target === cerModal) {
+            cerModal.classList.add("hidden");
+            cerModal.classList.remove("visible");
+        }
+    });
+});
+
+	</script>
+</body>
+</html>
